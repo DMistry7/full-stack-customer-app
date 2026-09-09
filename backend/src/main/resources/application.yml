@@ -12,6 +12,7 @@ cors:
 aws:
   region: eu-west-1
   s3:
+    mock: true
     buckets:
       customer: fs-dm-amigoscode-customer-test
 
