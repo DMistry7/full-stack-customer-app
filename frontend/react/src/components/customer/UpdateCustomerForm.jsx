@@ -1,7 +1,7 @@
 import {Form, Formik, useField} from 'formik';
 import * as Yup from 'yup';
 import {Alert, AlertIcon, Box, Button, FormLabel, Image, Input, Select, Stack, VStack} from "@chakra-ui/react";
-import {saveCustomer, updateCustomer} from "../../services/client.js";
+import {saveCustomer, updateCustomer, uploadCustomerProfilePicture, customerProfilePictureUrl} from "../../services/client.js";
 import {successNotification, errorNotification} from "../../services/notification.js";
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -69,7 +69,7 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                     borderRadius={'full'} // whole circle
                     boxSize={'150px'}
                     objectFit={'cover'} //ensure object fits
-                    src={''}
+                    src={customerProfilePictureUrl(customerId)}
                 />
                 <MyDropzone customerId={customerId}/>
             </VStack>
