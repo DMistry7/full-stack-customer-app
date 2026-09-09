@@ -1,8 +1,10 @@
 import {Form, Formik, useField} from 'formik';
 import * as Yup from 'yup';
-import {Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack} from "@chakra-ui/react";
+import {Alert, AlertIcon, Box, Button, FormLabel, Image, Input, Select, Stack, VStack} from "@chakra-ui/react";
 import {saveCustomer, updateCustomer} from "../../services/client.js";
 import {successNotification, errorNotification} from "../../services/notification.js";
+import { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 const MyTextInput = ({label, ...props}) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -22,11 +24,45 @@ const MyTextInput = ({label, ...props}) => {
         </Box>
     );
 };
+// Function from react drop zone
+const MyDropzone = () => {
+    const onDrop = useCallback(acceptedFiles => {
+        // Do something with the files
+    }, []);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+    return (
+        <Box {...getRootProps()}
+            w={'100%'} // width
+            textAlign= {'center'}
+            border={'dashed'} //dashed lines for box
+            borderColor={'gray.200'}
+            borderRadius={'3xl'}
+            p={6} // padding (adds space above and below)
+            rounded={'md'}  >
+            <input {...getInputProps()} />
+            {
+                isDragActive ?
+                    <p>Drop the picture here ...</p> :
+                    <p>Drag 'n' drop picture here, or click to select picture</p>
+            }
+        </Box>  // box instead of div to customise
+    );
+}
 
 // And now we can use these
 const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
     return (
         <>
+            <VStack spacing={'5'} mb={'5'}>
+                <Image
+                    borderRadius={'full'} // whole circle
+                    boxSize={'150px'}
+                    objectFit={'cover'} //ensure object fits
+                    src={''}
+                />
+                <MyDropzone/>
+            </VStack>
             <Formik
                 initialValues={initialValues}
                 validationSchema={Yup.object({
