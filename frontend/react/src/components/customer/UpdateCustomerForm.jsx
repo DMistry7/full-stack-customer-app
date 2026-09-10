@@ -25,7 +25,7 @@ const MyTextInput = ({label, ...props}) => {
     );
 };
 // Function from react drop zone
-const MyDropzone = ({ customerId }) => {
+const MyDropzone = ({ customerId, fetchCustomers }) => {
     const onDrop = useCallback(acceptedFiles => {
         const formData = new FormData();
         formData.append("file", acceptedFiles[0]) // file is the Request Param in upload customer profile image - Customer Controller
@@ -35,6 +35,7 @@ const MyDropzone = ({ customerId }) => {
             formData,
         ).then(() => {
             successNotification("Success", "Profile picture uploaded")
+            fetchCustomers()
         }).catch(() => {
             errorNotification("Error", "Profile picture failed uploaded")
         })
@@ -71,7 +72,10 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                     objectFit={'cover'} //ensure object fits
                     src={customerProfilePictureUrl(customerId)}
                 />
-                <MyDropzone customerId={customerId}/>
+                <MyDropzone
+                    customerId={customerId}
+                    fetchCustomers={fetchCustomers}
+                />
             </VStack>
             <Formik
                 initialValues={initialValues}
