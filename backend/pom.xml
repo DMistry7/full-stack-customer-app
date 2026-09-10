@@ -19,9 +19,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <jackson-bom.version>2.19.0</jackson-bom.version>
-        <docker.username>amigoscode</docker.username>
+        <docker.username>dmistry7</docker.username>
         <docker.image.name>amigoscode-api</docker.image.name>
-        <docker.image.tag/>
+        <docker.image.tag>v1</docker.image.tag>
         <jsonwebtoken.version>0.11.5</jsonwebtoken.version>
     </properties>
 
