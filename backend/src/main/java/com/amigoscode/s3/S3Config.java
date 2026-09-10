@@ -15,6 +15,7 @@ public class S3Config {
 
     @Value("${aws.s3.mock}")
     private boolean mock;
+    // takes mock from application.yml
 
     @Bean
     public S3Client s3Client() {
